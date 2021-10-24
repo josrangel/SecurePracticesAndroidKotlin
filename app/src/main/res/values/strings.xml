@@ -3,4 +3,6 @@
     <string name="txt_encrypt">Encrypt</string>
     <string name="txt_decrypt">decrypt</string>
     <string name="txt_normal">Normal Text</string>
+    <string name="text_root_detected"><b>Se ha detectado que el dispositivo ha sido rooteado. Por seguridad no está permitido usar la app en estas condiciones.</b></string>
+    <string name="text_warning_ime_keyboard">Se ha detectado que esta utilizando un teclado de un tercero. Algunos de estos teclados puede almacenar información confidencial como usuarios y contraseñas por lo que sugerimos usar un teclado del sistema.</string>
 </resources>
