@@ -1,8 +1,6 @@
 package com.josrangel.myapplication.utils
 
-import android.view.Window
 import android.view.WindowManager
-
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -18,7 +16,6 @@ class SecureUtils {
                 WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE
             )
-            activity.supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         }
 
     }

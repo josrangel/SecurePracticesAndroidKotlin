@@ -5,7 +5,7 @@ import android.provider.Settings
 import android.util.Log
 
 /**
- * Source:
+ * Source: for warning to prevent keylogger attacks through external keyboards app
  * https://stackoverflow.com/questions/2744729/how-to-determine-the-current-ime-in-android
  * https://java.hotexamples.com/es/examples/android.provider/Settings.Secure/getString/java-settings.secure-getstring-method-examples.html
  */

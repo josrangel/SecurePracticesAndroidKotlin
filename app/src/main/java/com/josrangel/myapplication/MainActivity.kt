@@ -1,18 +1,20 @@
 package com.josrangel.myapplication
 
 import android.os.Bundle
-import android.view.WindowManager
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.josrangel.myapplication.utils.EncriptUtils
+import com.josrangel.myapplication.utils.KeyboardUtils
 import com.josrangel.myapplication.utils.RootingUtils
+import com.josrangel.myapplication.utils.SecureUtils
 
 /**
  * Source:
- * https://stackoverflow.com/questions/38404237/how-to-hide-views-in-android-when-android-app-is-backgrounded-not-to-stop-andro
- *
+ * for prevent tapjacking attacks -> filterTouchesWhenObscured in view and manifest: https://medium.com/devknoxio/what-is-tapjacking-in-android-and-how-to-prevent-it-50140e57bf44
+ * for prevent task hijacking attacks -> taskAffinity in blank in manifest: https://blog.takemyhand.xyz/2021/02/android-task-hijacking-with.html#:~:text=What%20is%20task%20hijacking%20in%20Android%3F%20Task%20hijacking,greeted%20by%20the%20activity%20of%20the%20malicious%20app.
  */
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        makesecurityActivity()
+        makeSecureActivity()
         setContentView(R.layout.activity_main)
         verifyRooted()
         initIU()
@@ -43,6 +45,12 @@ class MainActivity : AppCompatActivity() {
         btnDecrypt.setOnClickListener {
             decriptText()
         }
+
+        etEncrypt.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
+            KeyboardUtils.isKeyboardSecurity(
+                this
+            )
+        })
     }
 
     private fun encriptText() {
@@ -55,17 +63,14 @@ class MainActivity : AppCompatActivity() {
         etNormal.setText(textDecript)
     }
 
-    private fun makesecurityActivity() {
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_SECURE,
-            WindowManager.LayoutParams.FLAG_SECURE
-        );
+    private fun makeSecureActivity() {
+        SecureUtils.makeSecureActivity(this)
     }
 
     private fun verifyRooted() {
         if (RootingUtils.isDeviceRooted()) {
-            Toast.makeText(this, getString(R.string.text_root_detected), Toast.LENGTH_LONG).show();
-            finish();
+            Toast.makeText(this, getString(R.string.text_root_detected), Toast.LENGTH_LONG).show()
+            finish()
         }
     }
 }
