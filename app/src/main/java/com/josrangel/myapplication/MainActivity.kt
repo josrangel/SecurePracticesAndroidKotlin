@@ -47,9 +47,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         etEncrypt.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
-            KeyboardUtils.isKeyboardSecurity(
-                this
-            )
+            verifyKeyboard()
+        })
+
+        etNormal.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
+            verifyKeyboard()
         })
     }
 
@@ -61,6 +63,13 @@ class MainActivity : AppCompatActivity() {
     private fun decriptText() {
         var textDecript = EncriptUtils.decrypt(etEncrypt.text.toString())
         etNormal.setText(textDecript)
+    }
+
+    private fun verifyKeyboard() {
+        if (!KeyboardUtils.isKeyboardSecurity(this)) {
+            Toast.makeText(this, getString(R.string.text_warning_ime_keyboard), Toast.LENGTH_LONG)
+                .show()
+        }
     }
 
     private fun makeSecureActivity() {
