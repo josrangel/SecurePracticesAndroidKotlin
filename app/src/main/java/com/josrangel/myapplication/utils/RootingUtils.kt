@@ -1,7 +1,10 @@
 package com.josrangel.myapplication.utils
 
+import android.content.Context
 import android.os.Build
+import com.scottyab.rootbeer.RootBeer
 import java.io.File
+
 
 /**
  * Source: https://stackoverflow.com/questions/1101380/determine-if-running-on-a-rooted-device
@@ -10,15 +13,18 @@ import java.io.File
 class RootingUtils {
 
     companion object {
-        fun isDeviceRooted(): Boolean {
-            return checkRootMethod1() || checkRootMethod2()
+        fun isDeviceRooted(context: Context): Boolean {
+            val rootBeer = RootBeer(context)
+            return rootBeer.isRooted || checkRootMethod1() || checkRootMethod2()
         }
 
+        //check for emulators
         private fun checkRootMethod1(): Boolean {
             val buildTags = Build.TAGS
             return buildTags != null && buildTags.contains("test-keys")
         }
 
+        //check for directories for super user
         private fun checkRootMethod2(): Boolean {
             val paths = arrayOf(
                 "/system/app/Superuser.apk",
@@ -39,4 +45,5 @@ class RootingUtils {
             return false
         }
     }
+
 }

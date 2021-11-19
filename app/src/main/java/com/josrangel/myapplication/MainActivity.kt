@@ -46,11 +46,11 @@ class MainActivity : AppCompatActivity() {
             decriptText()
         }
 
-        etEncrypt.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
+        etEncrypt.setOnFocusChangeListener(View.OnFocusChangeListener { _, _ ->
             verifyKeyboard()
         })
 
-        etNormal.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
+        etNormal.setOnFocusChangeListener(View.OnFocusChangeListener { _, _ ->
             verifyKeyboard()
         })
     }
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun verifyRooted() {
-        if (RootingUtils.isDeviceRooted()) {
+        if (RootingUtils.isDeviceRooted(this)) {
             Toast.makeText(this, getString(R.string.text_root_detected), Toast.LENGTH_LONG).show()
             finish()
         }
